@@ -5,10 +5,17 @@
     <van-button type="default">默认按钮</van-button>
     <van-button type="warning">警告按钮</van-button>
     <van-button type="danger">危险按钮</van-button>
+
+    <div class="box" style="font-size:37.5px">hello</div>
   </div>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
+.box{
+  background-color: pink;
+  width: 100px;
+  height: 100px;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
