@@ -108,6 +108,37 @@ git remote add origin https://github.com/oldhuang11/toutiao-m.git
    yarn add postcss-pxtorem@5.1.1
 
    npm i postcss-pxtorem@5.1.1
+   
+5. 提交问题  解决pre-commit hook failed (add --no-verify to bypass)的问题
+
+   解决 $ git commit --no-verify  -m "字体图标和图片素材"
+
+   #### 问题原因：
+
+   　　**pre-commit钩子惹的祸**
+
+   　　当你在终端输入git commit -m"XXX",提交代码的时候，
+   　　pre-commit(客户端)钩子，它会在Git键入提交信息前运行做代码风格检查。
+   　　如果代码不符合相应规则，则报错。
+
+    
+
+   **解决方式：**
+
+   #### 一、 简单粗暴的方式
+
+   1. 进入项目的.git文件夹下面hooks文件夹，手动删除pre-commit文件
+   2. 运行命令：rm -rf ./git/hooks/pre-commit 删除pre-commit文件
+
+   #### 二、 根据提示在命令中添加--no-verify
+
+   　　将git commit -m"XXX" 改为 git commit --no-verify –m"XXX"
+
+   
+
+   #### 三、 代码改到符合标准再提交（推荐使用这个）
+
+   
 
 ## vant组件库(黑马头条项目用的是vant@2.5.7)
 
