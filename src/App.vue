@@ -1,5 +1,7 @@
 <template>
   <div>asdfas
+    <i class="toutiao toutiao-shoucang"></i>
+    <hr>
     <van-button type="primary">主要按钮</van-button>
     <van-button type="info">信息按钮</van-button>
     <van-button type="default">默认按钮</van-button>
@@ -10,7 +12,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="less">
 .box{
   background-color: pink;
   width: 100px;
