@@ -66,7 +66,7 @@ git remote add origin https://github.com/oldhuang11/toutiao-m.git
 
 ```
 
-### 问题
+## 问题
 
 1. git push --set-upstream origin master
    remote: Permission to oldhuang11/toutiao-m.git denied to ohuang40.
@@ -138,7 +138,23 @@ git remote add origin https://github.com/oldhuang11/toutiao-m.git
 
    #### 三、 代码改到符合标准再提交（推荐使用这个）
 
-   
+6. 接口问题 参考下面的网址按需更新接口地址
+
+   https://www.idc1680.com/2531.html
+
+   https://geek.itheima.net/
+
+   https://geek.itheima.net/api.html
+
+   https://geek.itheima.net/api-pc.html
+
+   https://www.idc1680.com/2531.html
+
+   https://github.com/shuhongfan/heima-leadnews
+
+   https://apifox.com/apidoc/shared-fa9274ac-362e-4905-806b-6135df6aa90e
+
+   https://zhuanlan.zhihu.com/p/642124917
 
 ## vant组件库(黑马头条项目用的是vant@2.5.7)
 
@@ -378,8 +394,97 @@ Less是什么
 history mode和hash mode是什么
 
 ## 第二天
-##登录页路由配置
+## 登录页路由配置
 views/Login/index.vue
+
 ```shell
-  
+<template>
+<div class="login-contain">
+登录页面
+</div>
+</template>
+<script>
+export default{
+name:"LoginPage",
+components:{},
+props:{},
+data(){
+	return{
+	
+	}
+}
+computed:{},
+watch:{},
+created(){
+
+},
+mounted(){},
+methods:{}
+}
+</script>
+
+<style></style>
 ```
+
+app.vue
+
+```js
+<div>
+<router-view/>
+</div>
+```
+
+src/router/index.js
+
+```js
+import Vue from "vue"
+import VueRouter from "vue-router"
+
+Vue.use(VueRouter)
+
+const routes=[
+    {
+        path:"/login",
+        name:"login",
+        component:()=> import('@/views/login')
+    },
+    {
+        path:"/",
+        redirect:"/login"
+    }
+]
+
+const router = new VueRouter({
+    routes  // routes:routes
+})
+
+export default router
+```
+
+## NavBar导航栏
+
+https://www.bookstack.cn/read/vant-v2.0/5bbf8f441ca9e08a.md
+
+https://vant-contrib.gitee.io/vant/v2/#/zh-CN/nav-bar
+
+## form表单
+
+https://vant-contrib.gitee.io/vant/v2/#/zh-CN/form
+
+## field组件
+
+https://vant-contrib.gitee.io/vant/v2/#/zh-CN/field
+
+## 样式结构布局
+
+导航栏样式在 styles/index.less
+
+```css
+.page-nav-bar {
+    background-color: #3296fa;
+    .van-nav-bar__title {
+        color:#fff;
+    }
+}
+```
+

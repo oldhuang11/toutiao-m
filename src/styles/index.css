@@ -70,3 +70,12 @@
 .toutiao-fenxiang:before {
   content: "\e614";
 }
+.login-container .page-nav-bar {
+  background-color: #3296fa;
+}
+.login-container .page-nav-bar .van-nav-bar__title {
+  color: #fff;
+}
+body {
+  background-color: #f5f7f9;
+}
