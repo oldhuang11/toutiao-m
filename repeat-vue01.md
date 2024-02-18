@@ -376,3 +376,10 @@ REM适配?
 Less是什么
 
 history mode和hash mode是什么
+
+## 第二天
+##登录页路由配置
+views/Login/index.vue
+```shell
+  
+```
