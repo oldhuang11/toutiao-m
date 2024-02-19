@@ -155,6 +155,37 @@ git remote add origin https://github.com/oldhuang11/toutiao-m.git
    https://apifox.com/apidoc/shared-fa9274ac-362e-4905-806b-6135df6aa90e
 
    https://zhuanlan.zhihu.com/p/642124917
+   
+7. 'Toast' is not defined     no-undef
+
+   使用this.$toast
+
+   ```js
+       async onSubmit (values) {
+         this.$toast.loading({
+           message: '登录中...',
+           forbidClick: true,
+           duration: 0
+         })
+   
+         try {
+           const response = await loginApi(this.user)
+           console.log(response)
+           const { data: { data: { token } } } = response
+           this.$toast.success('登录成功')
+           console.log(token)
+         } catch (error) {
+           if (error.response.status === 400) {
+             console.log(error.response.data.message)
+             this.$toast.fail(error.response.data.message)
+           } else {
+             console.log('登陆失败请稍后再试', error)
+           }
+         }
+       }
+   ```
+
+   
 
 ## vant组件库(黑马头条项目用的是vant@2.5.7)
 
@@ -557,5 +588,65 @@ import { loginApi } from '../../api/user'
         }
       }
     }
+```
+
+## toast轻提示组件
+
+https://vant-ui.github.io/vant/v2/#/zh-CN/toast
+
+```js
+    async onSubmit (values) {
+      this.$toast.loading({
+        message: '登录中...',
+        forbidClick: true,
+        duration: 0
+      })
+
+      try {
+        const response = await loginApi(this.user)
+        console.log(response)
+        const { data: { data: { token } } } = response
+        this.$toast.success('登录成功')
+        console.log(token)
+      } catch (error) {
+        if (error.response.status === 400) {
+          console.log(error.response.data.message)
+          this.$toast.fail(error.response.data.message)
+        } else {
+          console.log('登陆失败请稍后再试', error)
+        }
+      }
+    }
+```
+
+## 表单校验
+
+https://vant-ui.github.io/vant/v2/#/zh-CN/form#rule-shu-ju-jie-gou
+
+```js
+  data () {
+    return {
+      user: {
+        mobile: '13911111111',
+        code: '246810'
+      },
+      loginFormRules: {
+        mobile: [{ pattern: /^1[3|5|7|8|6|9][0-9]{9}$/, message: '请输入正确的手机号' }],
+        code: [{ pattern: /^[0-9]{6}$/, message: '请输入6位数字' }]
+      }
+    }
+  }
+
+
+
+    <van-form @submit="onSubmit">
+      <van-field
+        v-model="user.mobile"
+        name="用户名"
+        placeholder="请填写手机号"
+        :rules="loginFormRules.mobile"
+        type="number"
+        maxlength="11"
+      >
 ```
 
