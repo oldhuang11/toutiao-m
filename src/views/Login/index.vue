@@ -8,17 +8,16 @@
 
     <van-form @submit="onSubmit">
       <van-field
+        v-model="user.mobile"
         name="用户名"
         placeholder="请填写手机号"
-        :rules="[{ required: true, message: '请填写用户名' }]"
       >
       <i slot="left-icon" class="toutiao toutiao-shouji"></i>
     </van-field>
       <van-field
+      v-model="user.code"
         name="验证码"
         placeholder="请输入验证码"
-        left-icon="chat-o"
-        :rules="[{ required: true, message: '请输入验证码' }]"
       >
       <i slot="left-icon" class="toutiao toutiao-yanzhengma"></i>
 
@@ -40,12 +39,15 @@
 
 <script>
 import { Toast } from 'vant'
+import { loginApi } from '../../api/user'
 
 export default {
   data () {
     return {
-      username: '',
-      password: ''
+      user: {
+        mobile: '13911111111',
+        code: '246810'
+      }
     }
   },
   name: 'LoginIndex',
@@ -56,9 +58,21 @@ export default {
     onClickRight () {
       Toast('按钮')
     },
-    onSubmit (values) {
-      console.log('submit', values)
+    async onSubmit (values) {
+      try {
+        const response = await loginApi(this.user)
+        console.log(response)
+        const { data: { data: { token } } } = response
+        console.log(token)
+      } catch (error) {
+        if (error.response.status === 400) {
+          console.log(error.response.data.message)
+        } else {
+          console.log('登陆失败请稍后再试', error)
+        }
+      }
     }
+
   }
 }
 </script>
@@ -73,7 +87,7 @@ export default {
     font-size: 37px;
   }
   .login-submit-btn{
-    margin: 16px;
+    margin: 36px  16px;
   }
   .send-msg-btn{
     border-left: 1px solid #ededed;

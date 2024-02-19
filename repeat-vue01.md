@@ -91,7 +91,7 @@ git remote add origin https://github.com/oldhuang11/toutiao-m.git
 
    ![image-20240217145625366](repeat-vue01.assets/image-20240217145625366.png)
 
-3.   启动vue,报错Vant is not defined
+3.   ## 启动vue,报错Vant is not defined
 
    配置按需引入后，将不允许直接导入所有组件。如果使用了导入所有vant组件的方式,不要配置按需导入的配置,否则启动会报错Vant is not defined,所以要注释掉
 
@@ -138,7 +138,7 @@ git remote add origin https://github.com/oldhuang11/toutiao-m.git
 
    #### 三、 代码改到符合标准再提交（推荐使用这个）
 
-6. 接口问题 参考下面的网址按需更新接口地址
+6. ## 接口问题 参考下面的网址按需更新接口地址
 
    https://www.idc1680.com/2531.html
 
@@ -393,6 +393,8 @@ Less是什么
 
 history mode和hash mode是什么
 
+async await?
+
 ## 第二天
 ## 登录页路由配置
 views/Login/index.vue
@@ -486,5 +488,74 @@ https://vant-contrib.gitee.io/vant/v2/#/zh-CN/field
         color:#fff;
     }
 }
+```
+
+
+
+## 添加表单添加事件
+
+```js
+<van-form @submit="onSubmit">
+```
+
+根据接口文档定义表单的变量
+
+```js
+v-model='user.mobile'
+v-model='user.code'
+
+data(){
+    return{
+        user:{
+            mobile:'',
+            code:''
+        }
+    }
+}
+```
+
+src/api/user.js添加工具接口
+
+```js
+ 
+{
+  "mobile": "13911111111",
+  "code": "246810"
+}
+ 
+
+
+import request from '@/utils/request'
+
+export const loginApi = data => {
+  return request({
+    url: '/v1_0/authorizations',
+    data,
+    method: 'POST'
+  }
+  )
+}
+```
+
+
+
+login/index.vue组件
+
+```js
+import { loginApi } from '../../api/user' 
+    async onSubmit (values) {
+      try {
+        const response = await loginApi(this.user)
+        console.log(response)
+        const { data: { data: { token } } } = response
+        console.log(token)
+      } catch (error) {
+        if (error.response.status === 400) {
+          console.log(error.response.data.message)
+        } else {
+          console.log('登陆失败请稍后再试', error)
+        }
+      }
+    }
 ```
 

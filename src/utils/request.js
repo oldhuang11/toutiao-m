@@ -3,7 +3,9 @@
 import axios from 'axios'
 
 const request = axios.create({
-  baseURL: 'http://ttapi.research.itcast.cn/'
+  baseURL: 'http://geek.itheima.net'
+  // baseURL: 'http://toutiao.itheima.net' http://geek.itheima.net/v1_0/authorizations
+  // baseURL: 'http://api-toutiao-web.itheima.net/mp'
 })
 
 // 导出
