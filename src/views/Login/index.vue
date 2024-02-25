@@ -4,7 +4,7 @@
       title="登录"
     />
 
-    <van-form @submit="onSubmit">
+    <van-form @submit="onSubmit" ref="loginForm">
       <van-field
         v-model="user.mobile"
         name="用户名"
@@ -13,7 +13,7 @@
         type="number"
         maxlength="11"
       >
-      <i slot="left-icon" class="toutiao toutiao-shouji"></i>
+      <i slot="left-icon" class="toutiao"></i>
     </van-field>
       <van-field
       v-model="user.code"
@@ -27,7 +27,8 @@
 
       <template #button>
         <div class="send-msg-btn">
-          <van-button size="small" type="default" round>发送验证码</van-button>
+          <van-button @click="sendSms" native-type="button" size="small" type="default" round v-if="!isCountDown">发送验证码</van-button>
+          <van-count-down @finish="isCountDown = false" :time="5*1000" format="ss s" v-else />
         </div>
       </template>
 
@@ -43,19 +44,20 @@
 
 <script>
 // import { Toast } from 'vant'
-import { loginApi } from '../../api/user'
+import { loginApi, sendSmsApi } from '../../api/user'
 
 export default {
   data () {
     return {
       user: {
-        mobile: '13911111111',
+        mobile: '13911111111', // 13811111111
         code: '246810'
       },
       loginFormRules: {
         mobile: [{ pattern: /^1[3|5|7|8|6|9][0-9]{9}$/, message: '请输入正确的手机号' }],
         code: [{ pattern: /^[0-9]{6}$/, message: '请输入6位数字' }]
-      }
+      },
+      isCountDown: false
     }
   },
   name: 'LoginIndex',
@@ -70,15 +72,37 @@ export default {
       try {
         const response = await loginApi(this.user)
         console.log(response)
-        const { data: { data: { token } } } = response
+        const { data: { data } } = response
+        console.log(data)
+        this.$store.commit('setUser', data)
         this.$toast.success('登录成功')
-        console.log(token)
       } catch (error) {
         if (error.response.status === 400) {
           console.log(error.response.data.message)
           this.$toast.fail(error.response.data.message)
         } else {
           console.log('登陆失败请稍后再试', error)
+        }
+      }
+    },
+    async sendSms () {
+      // 校验手机号
+      try {
+        this.$refs.loginForm.validate('mobile')
+      } catch (error) {
+        return console.log('form validate:', error)
+      }
+      try {
+        const res = await sendSmsApi(this.user.mobile)
+        console.log(res)
+        this.isCountDown = true
+      } catch (error) {
+        this.isCountDown = false
+        console.log(error)
+        if (error.response.status) {
+          this.$toast.fail(error.response.data.message)
+        } else {
+          this.$toast.fail('发送失败,请稍后再试')
         }
       }
     }
