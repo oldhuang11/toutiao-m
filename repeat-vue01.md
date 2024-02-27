@@ -1160,7 +1160,7 @@ export {
 
 ![image-20240227165302364](repeat-vue01.assets/image-20240227165302364.png)
 
-
+![image-20240227170637312](repeat-vue01.assets/image-20240227170637312.png)
 
 ## Photoshop里面查看某个图层的尺寸 **`f8`** 显示信息栏,  **`ctr`** + **`T`**  显示图层数据
 
