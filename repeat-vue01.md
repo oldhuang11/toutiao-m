@@ -1012,6 +1012,38 @@ https://vant-contrib.gitee.io/vant/v2/#/zh-CN/grid
 
 ![image-20240227115328861](repeat-vue01.assets/image-20240227115328861.png)
 
+## 注册中心组件根据vuex的state.user显示隐藏逻辑
+
+![image-20240227153820120](repeat-vue01.assets/image-20240227153820120.png)
+
+## 注册中心 `退出登录` 点击事件，设置user为空
+
+![image-20240227154016415](repeat-vue01.assets/image-20240227154016415.png)
+
+![image-20240227154104044](repeat-vue01.assets/image-20240227154104044.png)
+
+## 登录页面组件，登录成功返回原来的页面
+
+![image-20240227154319700](repeat-vue01.assets/image-20240227154319700.png)
+
+## 布局组件Layout，标签 `我的` 显示添加显示逻辑
+
+### this.$store.user 等于空 显示 `未登录` 不为空显示 `我的`
+
+![image-20240227154614827](repeat-vue01.assets/image-20240227154614827.png)
+
+##  vant 弹出框组件
+
+https://vant-contrib.gitee.io/vant/v2/#/zh-CN/dialog
+
+![image-20240227155037279](repeat-vue01.assets/image-20240227155037279.png)
+
+##  `退出登录` 点击事件-确认框 和设置store.state.user为null
+
+![image-20240227160406671](repeat-vue01.assets/image-20240227160406671.png)
+
+
+
 ## Photoshop里面查看某个图层的尺寸 **`f8`** 显示信息栏,  **`ctr`** + **`T`**  显示图层数据
 
 选中图层 **`f8`** 显示信息栏,  **`ctr`** + **`T`**  显示图层数据, **`esc`** 取消

@@ -1,16 +1,8 @@
 <template>
   <div class="my-container">
-    <!-- 个人中心-未登录 -->
-    <div class="header not-login">
-      <div class="login-btn" @click="$router.push('/login')">
-        <img class="mobile-img" src="~@/assets/mobile.png" alt="" />
-        <span class="text">登录 / 注册</span>
-      </div>
-    </div>
-    <!-- /个人中心-未登录 -->
 
     <!-- 个人中心-一登录 -->
-    <div class="header user-info">
+    <div class="header user-info" v-if="user">
       <div class="base-info">
         <div class="left">
           <van-image
@@ -44,6 +36,15 @@
         </div>
       </div>
     </div>
+    <!-- /个人中心-一登录 -->
+    <!-- 个人中心-未登录 -->
+    <div class="header not-login" v-else>
+      <div class="login-btn" @click="$router.push('/login')">
+        <img class="mobile-img" src="~@/assets/mobile.png" alt="" />
+        <span class="text">登录 / 注册</span>
+      </div>
+    </div>
+    <!-- /个人中心-未登录 -->
 
     <!-- 宫格导航 -->
     <van-grid :column-num="2" class="grid-nav"  clickable>
@@ -72,7 +73,7 @@
       </div>
     </div> -->
     <!-- /宫格导航 -->
-    <!-- /个人中心-一登录 -->
+
     <!-- 消息通知-小智同学-退出登录 -->
     <!-- <div class="cell-wrap">
       <div class="cell-item mb9">
@@ -91,14 +92,42 @@
     <van-cell-group>
       <van-cell title="消息通知" is-link />
       <van-cell title="小智同学" is-link/>
-      <van-cell title="退出登录" class="logout-cell"/>
+      <van-cell v-if="user" title="退出登录" class="logout-cell" @click="logoutFn"/>
     </van-cell-group>
      <!-- /消息通知-小智同学-退出登录 -->
   </div>
 </template>
 
 <script>
-export default {}
+// 获取mapState容器
+import { mapState } from 'vuex'
+
+export default {
+  name: 'MyIndex',
+  data () {
+    return {
+    }
+  },
+  computed: {
+    // 容器映射到computed
+    ...mapState(['user'])
+  },
+  methods: {
+    logoutFn () {
+      // 弹出框确认
+      this.$dialog.confirm({
+        title: '标题',
+        message: '弹窗内容'
+      }).then(() => {
+        // 确认
+        // this.$store.user = null 错误 vuex state容器要通过 mutations去处理
+        this.$store.commit('setUser', null)
+      }).catch(() => {
+
+      })
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>

@@ -77,6 +77,8 @@ export default {
         console.log(data)
         this.$store.commit('setUser', data)
         this.$toast.success('登录成功')
+        // 登录成功 回退 这样做不严谨 后面会优化
+        this.$router.back()
       } catch (error) {
         if (error.response.status === 400) {
           console.log(error.response.data.message)
