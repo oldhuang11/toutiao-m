@@ -9,9 +9,9 @@
             class="avater"
             round
             cover
-            src="https://img01.yzcdn.cn/vant/cat.jpeg"
+            :src="userInfo.photo"
           />
-          <span class="name">黑马头条号</span>
+          <span class="name">{{ userInfo.name  }}</span>
         </div>
         <div class="right">
           <van-button size="mini" round>编辑资料</van-button>
@@ -20,18 +20,18 @@
       <div class="data-stats">
         <div class="data-item">
           <span class="count">10</span>
-          <span class="text">头条</span>
+          <span class="text">{{ userInfo.art_count }}</span>
         </div>
         <div class="data-item">
-          <span class="count">100</span>
+          <span class="count">{{ userInfo.follow_count }}</span>
           <span class="text">关注</span>
         </div>
         <div class="data-item">
-          <span class="count">88</span>
+          <span class="count">{{ userInfo.fans_count }}</span>
           <span class="text">粉丝</span>
         </div>
         <div class="data-item">
-          <span class="count">6</span>
+          <span class="count">{{ userInfo.like_count }}</span>
           <span class="text">获赞</span>
         </div>
       </div>
@@ -101,11 +101,12 @@
 <script>
 // 获取mapState容器
 import { mapState } from 'vuex'
-
+import { getUserInfo } from '../../api/user'
 export default {
   name: 'MyIndex',
   data () {
     return {
+      userInfo: {}
     }
   },
   computed: {
@@ -125,6 +126,20 @@ export default {
       }).catch(() => {
 
       })
+    },
+    async loadUserInfo () {
+      try {
+        const res = await getUserInfo()
+        console.log('getUserInfo res:', res)
+        this.userInfo = res.data.data
+      } catch (error) {
+        this.$toast.fail('获取用户信息失败，请稍后再试')
+      }
+    }
+  },
+  created () {
+    if (this.user) {
+      this.loadUserInfo()
     }
   }
 }

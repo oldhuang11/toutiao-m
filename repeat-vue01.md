@@ -1,3 +1,36 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 后台接口文档相关
+
+### https://www.idc1680.com/2531.html
+
+### https://geek.itheima.net/api.html
+
+```text
+测试账号 17090086870 / 13911111111 / 13811111111
+通用密码 246810
+```
+
+
+
 ## 使用Vue CLI 创建项目
 
 ```shell
@@ -1041,6 +1074,91 @@ https://vant-contrib.gitee.io/vant/v2/#/zh-CN/dialog
 ##  `退出登录` 点击事件-确认框 和设置store.state.user为null
 
 ![image-20240227160406671](repeat-vue01.assets/image-20240227160406671.png)
+
+
+
+## user.js 编写获取用户信息接口
+
+```js
+
+/*
+获取用户自己信息
+Path： /v1_0/user
+Method： GET
+
+返回状态码
+400 请求参数错误
+401 用户认证失败
+507 数据库错误
+200 OK
+
+header
+Authorization
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDMyODQzNjYsInVzZXJfaWQiOjF9.mLYitrKsn4E4KdQd0CNPugKrH8uQmXEQTlG_JutC8jU
+用户令牌token，必传
+ */
+const getUserInfo = () => request({
+  url: '/v1_0/user'
+
+})
+```
+
+![image-20240227163400274](repeat-vue01.assets/image-20240227163400274.png)
+
+## Bearer 持票人
+
+```js
+// user.js
+import request from '../utils/request'
+import store from '../store/'
+const loginApi = data => {
+  return request({
+    url: '/v1_0/authorizations',
+    data,
+    method: 'POST'
+  }
+  )
+}
+
+const sendSmsApi = mobile => request({
+  url: `/v1_0/sms/codes/${mobile}`
+})
+
+/*
+获取用户自己信息
+Path： /v1_0/user
+Method： GET
+
+返回状态码
+400 请求参数错误
+401 用户认证失败
+507 数据库错误
+200 OK
+
+header
+Authorization
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDMyODQzNjYsInVzZXJfaWQiOjF9.mLYitrKsn4E4KdQd0CNPugKrH8uQmXEQTlG_JutC8jU
+用户令牌token，必传
+ */
+const getUserInfo = () => request({
+  url: '/v1_0/user',
+  headers: {
+    Authorization: `Bearer ${store.state.user.token}`
+  }
+})
+export {
+  loginApi,
+  sendSmsApi,
+  getUserInfo
+}
+
+```
+
+
+
+![image-20240227164841036](repeat-vue01.assets/image-20240227164841036.png)
+
+![image-20240227165302364](repeat-vue01.assets/image-20240227165302364.png)
 
 
 
