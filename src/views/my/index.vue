@@ -56,8 +56,44 @@
         <span class="text" slot="text">历史</span>
       </van-grid-item>
     </van-grid>
+
+    <!-- <div class="g-nav">
+      <div class="left">
+        <div class="g-item">
+          <i class="toutiao toutiao-shoucang" slot="icon"></i>
+          <span class="text" slot="text">收藏</span>
+        </div>
+      </div>
+      <div class="right">
+        <div class="g-item">
+          <i class="toutiao toutiao-lishi"></i>
+          <span class="text" slot="text">历史</span>
+        </div>
+      </div>
+    </div> -->
     <!-- /宫格导航 -->
     <!-- /个人中心-一登录 -->
+    <!-- 消息通知-小智同学-退出登录 -->
+    <!-- <div class="cell-wrap">
+      <div class="cell-item mb9">
+        <span class="left">消息通知</span>
+        <i class="toutiao toutiao-zuojiantou right"></i>
+      </div>
+      <div class="cell-item mb9">
+        <span class="left">小智同学</span>
+        <i class="toutiao toutiao-zuojiantou right mb9"></i>
+      </div>
+      <div class="cell-item">
+        <span class="left logout">退出登录</span>
+      </div>
+    </div> -->
+
+    <van-cell-group>
+      <van-cell title="消息通知" is-link />
+      <van-cell title="小智同学" is-link/>
+      <van-cell title="退出登录" class="logout-cell"/>
+    </van-cell-group>
+     <!-- /消息通知-小智同学-退出登录 -->
   </div>
 </template>
 
@@ -154,6 +190,77 @@ export default {}
         font-size: 28px;
       }
     }
+  }
+  .g-nav{
+    border-bottom: 1px solid #ebedf0;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+    .left{
+      display: flex;
+      justify-content: center;
+      flex: 1;
+    }
+    .right{
+      border-left: 1px solid #ebedf0;
+      display: flex;
+      justify-content: center;
+      flex: 1;
+    }
+    .g-item{
+      height: 141px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      display: flex;
+      i.toutiao{
+        font-size: 45px;
+        color: #eb5253;
+      }
+      i.toutiao-lishi{
+        margin-bottom: 10px;
+        color: #ffa938;
+      }
+      span.text{
+        font-size: 28px;
+      }
+    }
+
+  }
+  .cell-wrap{
+    display: flex;
+    justify-content: center;
+    flex-direction:column;
+
+    .cell-item{
+      height: 95px;
+      background-color: #fff;
+      bottom: 1px solid #ebedf0;
+      padding: 44px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 30px;
+      box-sizing:border-box;
+      i.toutiao-zuojiantou{
+        font-size: 21px;
+      }
+      .logout{
+        flex: 1;
+        text-align: center;
+        color:#d86262
+      }
+    }
+  }
+
+  .logout-cell{
+    text-align: center;
+    color:#d86262
+  }
+  .mb9{
+    margin-bottom: 9px;
   }
 }
 </style>

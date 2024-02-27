@@ -1006,6 +1006,12 @@ https://vant-contrib.gitee.io/vant/v2/#/zh-CN/grid
 
 ![image-20240226162627273](repeat-vue01.assets/image-20240226162627273.png)
 
+## https://vant-contrib.gitee.io/vant/v2/#/zh-CN/cell 单元格组件
+
+![image-20240227115201185](repeat-vue01.assets/image-20240227115201185.png)
+
+![image-20240227115328861](repeat-vue01.assets/image-20240227115328861.png)
+
 ## Photoshop里面查看某个图层的尺寸 **`f8`** 显示信息栏,  **`ctr`** + **`T`**  显示图层数据
 
 选中图层 **`f8`** 显示信息栏,  **`ctr`** + **`T`**  显示图层数据, **`esc`** 取消
