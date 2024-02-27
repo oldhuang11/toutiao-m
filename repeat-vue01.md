@@ -1162,6 +1162,96 @@ export {
 
 ![image-20240227170637312](repeat-vue01.assets/image-20240227170637312.png)
 
+## 封装request添加请求拦截器
+
+```js
+// request.js
+// 封装axios请求模块
+// 引入axios
+import axios from 'axios'
+
+import store from '../store'
+
+const request = axios.create({
+  baseURL: 'http://geek.itheima.net'
+  // baseURL: 'http://toutiao.itheima.net' http://geek.itheima.net/v1_0/authorizations
+  // baseURL: 'http://api-toutiao-web.itheima.net/mp'
+})
+
+// 请求拦截器
+request.interceptors.request.use(function (config) {
+  // 在发送请求之前做些什么
+  const { user } = store.state
+  if (user && user.token) {
+    config.headers.Authorization = 'Bearer ' + user.token
+  }
+  console.log(config)
+  // 必须 return config 否则请求就停止这里出不去
+  return config
+}, function (error) {
+  // 对请求错误做些什么
+  return Promise.reject(error)
+})
+
+// 导出
+export default request
+
+```
+
+```js
+// user.js
+import request from '../utils/request'
+
+const loginApi = data => {
+  return request({
+    url: '/v1_0/authorizations',
+    data,
+    method: 'POST'
+  }
+  )
+}
+
+const sendSmsApi = mobile => request({
+  url: `/v1_0/sms/codes/${mobile}`
+})
+
+/*
+获取用户自己信息
+Path： /v1_0/user
+Method： GET
+
+返回状态码
+400 请求参数错误
+401 用户认证失败
+507 数据库错误
+200 OK
+
+header
+Authorization
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDMyODQzNjYsInVzZXJfaWQiOjF9.mLYitrKsn4E4KdQd0CNPugKrH8uQmXEQTlG_JutC8jU
+用户令牌token，必传
+
+17090086870 / 13911111111 / 13811111111
+246810
+ */
+const getUserInfo = () => request({
+  url: '/v1_0/user'
+  // headers: {
+  //   Authorization: `Bearer ${store.state.user.token}`
+  // }
+})
+export {
+  loginApi,
+  sendSmsApi,
+  getUserInfo
+}
+
+```
+
+
+
+![image-20240227172230444](repeat-vue01.assets/image-20240227172230444.png)
+
 ## Photoshop里面查看某个图层的尺寸 **`f8`** 显示信息栏,  **`ctr`** + **`T`**  显示图层数据
 
 选中图层 **`f8`** 显示信息栏,  **`ctr`** + **`T`**  显示图层数据, **`esc`** 取消

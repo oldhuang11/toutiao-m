@@ -1,5 +1,5 @@
 import request from '../utils/request'
-import store from '../store/'
+
 const loginApi = data => {
   return request({
     url: '/v1_0/authorizations',
@@ -33,10 +33,10 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDMyODQzNjYsInVzZXJfaWQi
 246810
  */
 const getUserInfo = () => request({
-  url: '/v1_0/user',
-  headers: {
-    Authorization: `Bearer ${store.state.user.token}`
-  }
+  url: '/v1_0/user'
+  // headers: {
+  //   Authorization: `Bearer ${store.state.user.token}`
+  // }
 })
 export {
   loginApi,
