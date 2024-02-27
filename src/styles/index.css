@@ -73,7 +73,8 @@
 .page-nav-bar.van-nav-bar {
   background-color: #3296fa;
 }
-.page-nav-bar .van-nav-bar__title {
+.page-nav-bar .van-nav-bar__title,
+.page-nav-bar .toutiao-guanbi {
   color: #fff;
 }
 body {

@@ -2,8 +2,9 @@
   <div class="login-container">
     <van-nav-bar class="page-nav-bar"
       title="登录"
-    />
-
+    >
+    <i class="toutiao toutiao-guanbi" slot="left"   @click="$router.back()" ></i>
+    </van-nav-bar>
     <van-form @submit="onSubmit" ref="loginForm">
       <van-field
         v-model="user.mobile"
@@ -13,7 +14,7 @@
         type="number"
         maxlength="11"
       >
-      <i slot="left-icon" class="toutiao"></i>
+      <i slot="left-icon" class="toutiao-shouji"></i>
     </van-field>
       <van-field
       v-model="user.code"
@@ -117,7 +118,7 @@ export default {
     font-size: 37px;
   }
 
-  .toutiao-yanzhengma{
+  .toutiao{
     font-size: 37px;
   }
   .login-submit-btn{
